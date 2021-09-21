@@ -6,7 +6,7 @@
 #    By: soooh <soooh@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/18 14:49:29 by soooh             #+#    #+#              #
-#    Updated: 2021/09/18 22:45:58 by soooh            ###   ########.fr        #
+#    Updated: 2021/09/21 17:33:40 by soooh            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,8 +28,9 @@ SRCS_DIR =	./srcs
 OBJS_DIR = ./objs
 INC_DIR = ./includes
 
-SRCS =	./srcs/ft_atoi.c	\
-		./srcs/philo.c			\
+SRCS =	./srcs/ph_atoi.c	\
+		./srcs/ph_utils.c	\
+		./srcs/philo.c		\
 
 OBJS = $(addprefix $(OBJS_DIR)/, $(notdir $(SRCS:.c=.o)))
 
