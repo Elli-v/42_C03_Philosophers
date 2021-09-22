@@ -6,7 +6,7 @@
 /*   By: soooh <soooh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/18 14:51:58 by soooh             #+#    #+#             */
-/*   Updated: 2021/09/22 01:46:22 by soooh            ###   ########.fr       */
+/*   Updated: 2021/09/23 01:41:10 by soooh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int		init_info(t_info *info, char **argv, int argc)
 	else
 		info->must_eat = -1;
 	info->end = 0;
-	info->start_time = 0;
+	info->base_time = 0;
 	if (init_fork(info))
 		return (1);
 	return (0);
@@ -75,8 +75,25 @@ int		init_philo(t_info *info)
 		info->philo[i].eat_cnt = 0;
 		info->philo[i].eating = 0;
 		info->philo[i].info = info;
+		if (pthread_mutex_init(&info->philo[i].critical, NULL))
+			return (ph_err("초기화 실패. 유감.\n"));
 	}
 	return (0);
+}
+
+void	ph_free(t_info *info)
+{
+	int	i;
+
+	i = -1;
+	while (++i < info->num_philo)
+	{
+		pthread_mutex_destroy(&info->fork[i]);
+		pthread_mutex_destroy(&info->philo[i].critical);
+	}
+	pthread_mutex_destroy(&info->print);
+	free(info->philo);
+	free(info->fork);
 }
 
 int		main(int argc, char *argv[])
@@ -86,5 +103,6 @@ int		main(int argc, char *argv[])
 	if (argc < 5 || argc > 6)
 		return(ph_err("Error: 올바른 인자 갯수가 아니셈"));
 	init_info(&info, argv, argc);
+	init_philo(&info);
 	
 }

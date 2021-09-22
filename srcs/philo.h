@@ -6,7 +6,7 @@
 /*   By: soooh <soooh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/18 15:04:00 by soooh             #+#    #+#             */
-/*   Updated: 2021/09/22 01:47:20 by soooh            ###   ########.fr       */
+/*   Updated: 2021/09/23 00:13:04 by soooh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ struct	s_info
 	int				time_to_eat; //식사 시간
 	int				time_to_sleep; //자는 시간
 	int				must_eat; //식사를 할 최소한의 인원
-	int				start_time; //프로그램 시작 시간
+	int				base_time; //프로그램 시작 시간 == 기준 시간
 	int				end; //프로그램 종료 유무
 	pthread_mutex_t	*fork;
 	pthread_mutex_t	print;
@@ -39,19 +39,22 @@ struct	s_info
 
 struct	s_philo
 {
-	int				sequence; //상태
+	int				sequence; //순서
 	int				f_left; //포크 잡은 왼쪽 손
 	int				f_right; //포크 잡은 오른쪽 손
+	int				start_time; // 해당 순서 철학자가 시작한 시간
 	int				last_eat; //마지막으로 식사한 시간
 	int				eat_cnt; //먹은 횟수
 	int				eating; //먹는 중인지 아닌지
-	pthread_t		philo_th;
-	pthread_t		monitor;
+	pthread_t		phlio_id; //스레드 ID받음
+	pthread_t		print_id;
+	pthread_mutex_t	critical;
 	t_info			*info;
 };
 
 
 int	ph_atoi(char *str);
 int	ph_err(char *str);
+int	get_time(void);
 
 #endif
