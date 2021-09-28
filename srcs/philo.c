@@ -6,7 +6,7 @@
 /*   By: soooh <soooh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/18 14:51:58 by soooh             #+#    #+#             */
-/*   Updated: 2021/09/23 01:41:10 by soooh            ###   ########.fr       */
+/*   Updated: 2021/09/28 17:53:03 by soooh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,5 @@ int		main(int argc, char *argv[])
 		return(ph_err("Error: 올바른 인자 갯수가 아니셈"));
 	init_info(&info, argv, argc);
 	init_philo(&info);
-	
+	dining_table(&info);
 }

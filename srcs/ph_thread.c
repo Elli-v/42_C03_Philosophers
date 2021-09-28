@@ -6,12 +6,11 @@
 /*   By: soooh <soooh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 14:04:35 by soooh             #+#    #+#             */
-/*   Updated: 2021/09/23 03:07:52 by soooh            ###   ########.fr       */
+/*   Updated: 2021/09/29 00:46:28 by soooh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
 
 void	*monitor(void *parameter)
 {
@@ -41,24 +40,30 @@ void	*philosopher(void *parameter)
 		usleep(1000 * philo->info->time_to_eat);
 	while (!philo->info->end)
 	{
-		//먹는다
+		eat(philo);
+		if (philo->info->must_eat != -1 && check_eat(philo))
+			break;
 		//먹었는지 체크
 		if (philo->info->end)
 			break ;
+		sleeping(philo);
 		//잔다
 		if (philo->info->end)
 			break ;
 		//생각한다
+		thinking(philo);
 		if (philo->info->end)
 			break ;
 	}
+	return (NULL);
 }
 
 int	dining_table(t_info *info)
 {
 	int i;
 
-	info->base_time = //시간 지정 함수 
+	info->base_time = get_time();//시간 지정 함수 
+	// printf("%d\n", info->base_time);
 	i = -1;
 	while (++i < info->num_philo)
 	{
@@ -71,9 +76,9 @@ int	dining_table(t_info *info)
 	i = -1;
 	while (++i < info->num_philo)
 	{
-		if (pthread_join(&info->philo[i].phlio_id, NULL))
+		if (pthread_join(info->philo[i].phlio_id, NULL))
 			return(ph_err("스레드 생성 실패함.\n"));
-		if (pthread_join(&info->philo[i].print_id, NULL))
+		if (pthread_join(info->philo[i].print_id, NULL))
 			return(ph_err("스레드 생성 실패함.\n"));
 	}
 	return (0);
