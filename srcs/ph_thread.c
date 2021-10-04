@@ -6,7 +6,7 @@
 /*   By: soooh <soooh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 14:04:35 by soooh             #+#    #+#             */
-/*   Updated: 2021/09/29 00:46:28 by soooh            ###   ########.fr       */
+/*   Updated: 2021/10/04 23:05:22 by soooh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,21 @@ void	*monitor(void *parameter)
 	while (!philo->info->end)
 	{
 		//critical 잠그기
+		pthread_mutex_lock(&philo->critical);
 		//if 현재시간 - 시작시간 >= 죽기까지 시간
+		if (get_time() - philo->start_time >= philo->info->time_to_die)
+		{
+			print_situation(philo, DIED);
 			//died 문구 출력
 			//stop == true
+			philo->info->end = 1;
 			//mutex_unlock
-			//break;
+			pthread_mutex_unlock(&philo->critical);
+			break;
+		}
+		pthread_mutex_unlock(&philo->critical);
 		//mutex_unlock
-		//usleep(100)
+		usleep(100);
 	}
 	return(NULL);
 }
