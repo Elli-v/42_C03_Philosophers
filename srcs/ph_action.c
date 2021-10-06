@@ -6,7 +6,7 @@
 /*   By: soooh <soooh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 00:45:34 by soooh             #+#    #+#             */
-/*   Updated: 2021/10/05 00:33:34 by soooh            ###   ########.fr       */
+/*   Updated: 2021/10/06 23:11:18 by soooh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int		check_eat(t_philo *philo)
 			return (0);
 	}
 	philo->info->end = 1;
+	
 	return (0);
 }
 
@@ -39,7 +40,7 @@ void	eat(t_philo *philo)
 		print_situation(philo, FORK);
 		while (!philo->info->end)
 			usleep(1000);
-		pthread_mutex_lock(&philo->info->fork[philo->f_right]);
+		pthread_mutex_unlock(&philo->info->fork[philo->f_right]);
 	}
 	else
 	{
@@ -47,7 +48,6 @@ void	eat(t_philo *philo)
 		print_situation(philo, FORK);
 		pthread_mutex_lock(&philo->info->fork[philo->f_left]);
 		print_situation(philo, FORK);
-
 		pthread_mutex_lock(&philo->critical);
 		print_situation(philo, EATING);
 		philo->start_time = get_time();
