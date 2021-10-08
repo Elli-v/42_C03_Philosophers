@@ -6,7 +6,7 @@
 /*   By: soooh <soooh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 00:45:34 by soooh             #+#    #+#             */
-/*   Updated: 2021/10/06 23:11:18 by soooh            ###   ########.fr       */
+/*   Updated: 2021/10/08 19:03:58 by soooh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ int		check_eat(t_philo *philo)
 	i = -1;
 	cnt = 0;
 	//왜 philo->info->philo[i].eating 을 써야 하는지 모르겠다.. ㅜ
-	//./philo 5 800 200 200 7 했을 때 '7' == 식사 조건 충족 시 실행 종료 == 모든 철학자의 7 번의 식사가 끝나면 종료
-	//
 	while (++i < philo->info->num_philo)
 	{
 		if (philo->info->philo[i].eating < philo->info->must_eat)
