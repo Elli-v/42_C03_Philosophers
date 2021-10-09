@@ -6,7 +6,7 @@
 /*   By: soooh <soooh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/18 15:04:00 by soooh             #+#    #+#             */
-/*   Updated: 2021/09/29 00:47:32 by soooh            ###   ########.fr       */
+/*   Updated: 2021/10/09 16:41:55 by soooh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <sys/time.h>
 # include <pthread.h>
 
-
 # define FORK 1
 # define EATING 2
 # define SLEEPING 3
@@ -32,13 +31,13 @@ typedef struct s_philo	t_philo;
 
 struct	s_info
 {
-	int				num_philo; //철학자 수
-	int				time_to_die; //죽을 조건 시간
-	int				time_to_eat; //식사 시간
-	int				time_to_sleep; //자는 시간
-	int				must_eat; //식사를 할 최소한의 인원
-	int				base_time; //프로그램 시작 시간 == 기준 시간
-	int				end; //프로그램 종료 유무
+	int				num_philo;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				must_eat;
+	int				base_time;
+	int				end;
 	pthread_mutex_t	*fork;
 	pthread_mutex_t	print;
 	t_philo			*philo;
@@ -46,16 +45,16 @@ struct	s_info
 
 struct	s_philo
 {
-	int				sequence; //순서
-	int				f_left; //포크 잡은 왼쪽 손
-	int				f_right; //포크 잡은 오른쪽 손
-	int				start_time; // 해당 순서 철학자가 시작한 시간
-	int				last_eat; //마지막으로 식사한 시간
-	int				eat_cnt; //먹은 횟수
-	int				eating; //먹는 중인지 아닌지
-	pthread_t		phlio_id; //스레드 ID받음
+	int				sequence;
+	int				f_left;
+	int				f_right;
+	int				start_time;
+	int				last_eat;
+	int				eat_cnt;
+	int				eating;
+	pthread_t		phlio_id;
 	pthread_t		print_id;
-	pthread_mutex_t	critical;//출력 순서 꼬이면 오류 발생 -> 꼬임 방지 mutex 선언
+	pthread_mutex_t	critical;
 	t_info			*info;
 };
 
@@ -72,7 +71,6 @@ int		check_eat(t_philo *philo);
 void	eat(t_philo *philo);
 void	sleeping(t_philo *philo);
 void	thinking(t_philo *phlio);
-
 
 int		init_fork(t_info *info);
 int		init_info(t_info *info, char **argv, int argc);

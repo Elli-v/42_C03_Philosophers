@@ -6,7 +6,7 @@
 /*   By: soooh <soooh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/18 14:51:58 by soooh             #+#    #+#             */
-/*   Updated: 2021/10/06 22:54:31 by soooh            ###   ########.fr       */
+/*   Updated: 2021/10/09 16:35:20 by soooh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@ int		init_fork(t_info *info)
 	info->fork = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t)
 	* info->num_philo);
 	if (!info->fork)
-		return (ph_err("malloc 실패함. 유감.\n"));
+		return (ph_err("Error: Malloc failed.\n"));
 	i = -1;
 	while (++i < info->num_philo)
 	{
 		if (pthread_mutex_init(&info->fork[i], NULL))
-			return (ph_err("초기화 실패. 유감.\n"));
+			return (ph_err("Error: Initialization failed.\n"));
 	}
 	if (pthread_mutex_init(&info->print, NULL))
-		return (ph_err("초기화 실패. 유감.\n"));
+		return (ph_err("Error: Initialization failed.\n"));
 	return (0);
 }
 
@@ -35,19 +35,19 @@ int		init_info(t_info *info, char **argv, int argc)
 {
 	info->num_philo = ph_atoi(argv[1]);
 	if (info->num_philo <= 0)
-		return(ph_err("Error: 철학자는 1 명 이상이어야 함"));
+		return(ph_err("Error: There must be at least one philosopher."));
 	else if (info->num_philo >= 200)
-		return(ph_err("Error: 철학자는 200 명을 넘을 수 없다"));
+		return(ph_err("Error: only accommodate less than 200 philosophers."));
 	info->time_to_die = ph_atoi(argv[2]);
 	info->time_to_eat = ph_atoi(argv[3]);
 	info->time_to_sleep = ph_atoi(argv[4]);
 	if (info->time_to_die < 60 || info->time_to_eat < 60 || info->time_to_sleep < 60)
-		return (ph_err("60ms 미만은 테스트 ㄴㄴ임\n"));
+		return (ph_err("Error: It should be at least 60ms.\n"));
 	if (argc ==6)
 	{
 		info->must_eat = ph_atoi(argv[5]);
 		if (info->must_eat <= 0)
-			return (ph_err("적어도 1 명 이상의 철학자가 식사를 해야 한다\n"));
+			return (ph_err("Error: requires at least one meal.\n"));
 	}
 	else
 		info->must_eat = -1;
@@ -64,7 +64,7 @@ int		init_philo(t_info *info)
 
 	info->philo = (t_philo *)malloc(sizeof(t_philo) * info->num_philo);
 	if (!info->philo)
-		return (ph_err("malloc 실패함. 유감.\n"));
+		return (ph_err("Error: Malloc failed.\n"));
 	i = -1;
 	while (++i < info->num_philo)
 	{
@@ -76,7 +76,7 @@ int		init_philo(t_info *info)
 		info->philo[i].eating = 0;
 		info->philo[i].info = info;
 		if (pthread_mutex_init(&info->philo[i].critical, NULL))
-			return (ph_err("초기화 실패. 유감.\n"));
+			return (ph_err("Error: Initialization failed.\n"));
 	}
 	return (0);
 }
@@ -101,7 +101,7 @@ int		main(int argc, char *argv[])
 	t_info info;
 
 	if (argc < 5 || argc > 6)
-		return(ph_err("Error: 올바른 인자 갯수가 아니셈"));
+		return(ph_err("Error: Invalid number of arguments"));
 	if (init_info(&info, argv, argc))
 		return (1);
 	if (init_philo(&info))

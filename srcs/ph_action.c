@@ -6,7 +6,7 @@
 /*   By: soooh <soooh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 00:45:34 by soooh             #+#    #+#             */
-/*   Updated: 2021/10/08 19:03:58 by soooh            ###   ########.fr       */
+/*   Updated: 2021/10/09 15:02:52 by soooh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,12 @@ int		check_eat(t_philo *philo)
 
 	i = -1;
 	cnt = 0;
-	//왜 philo->info->philo[i].eating 을 써야 하는지 모르겠다.. ㅜ
 	while (++i < philo->info->num_philo)
 	{
 		if (philo->info->philo[i].eating < philo->info->must_eat)
 			return (0);
 	}
-	philo->info->end = 1;
-	
+	philo->info->end = 1;	
 	return (0);
 }
 
