@@ -6,15 +6,15 @@
 /*   By: soooh <soooh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 00:45:34 by soooh             #+#    #+#             */
-/*   Updated: 2021/10/09 15:02:52 by soooh            ###   ########.fr       */
+/*   Updated: 2021/10/11 22:11:37 by soooh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int		check_eat(t_philo *philo)
+int	check_eat(t_philo *philo)
 {
-	int i;
+	int	i;
 	int	cnt;
 
 	i = -1;
@@ -24,7 +24,7 @@ int		check_eat(t_philo *philo)
 		if (philo->info->philo[i].eating < philo->info->must_eat)
 			return (0);
 	}
-	philo->info->end = 1;	
+	philo->info->end = 1;
 	return (0);
 }
 
@@ -48,7 +48,8 @@ void	eat(t_philo *philo)
 		print_situation(philo, EATING);
 		philo->start_time = get_time();
 		pthread_mutex_unlock(&philo->critical);
-		while (get_time() - philo->start_time <= philo->info->time_to_eat && !philo->info->end)
+		while (get_time() - philo->start_time <= philo->info->time_to_eat
+			&& !philo->info->end)
 			usleep(1000);
 		philo->eating++;
 		pthread_mutex_unlock(&philo->info->fork[philo->f_left]);
@@ -62,7 +63,8 @@ void	sleeping(t_philo *philo)
 
 	sleep_time = get_time();
 	print_situation(philo, SLEEPING);
-	while (get_time() - sleep_time <= philo->info->time_to_sleep && !philo->info->end)
+	while (get_time() - sleep_time <= philo->info->time_to_sleep
+		&& !philo->info->end)
 		usleep(1000);
 }
 

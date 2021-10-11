@@ -6,18 +6,18 @@
 /*   By: soooh <soooh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/18 14:51:58 by soooh             #+#    #+#             */
-/*   Updated: 2021/10/09 16:35:20 by soooh            ###   ########.fr       */
+/*   Updated: 2021/10/11 23:05:56 by soooh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int		init_fork(t_info *info)
+int	init_fork(t_info *info)
 {
 	int	i;
 
-	info->fork = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t)
-	* info->num_philo);
+	info->fork = (pthread_mutex_t *)
+		malloc(sizeof(pthread_mutex_t) * info->num_philo);
 	if (!info->fork)
 		return (ph_err("Error: Malloc failed.\n"));
 	i = -1;
@@ -31,19 +31,20 @@ int		init_fork(t_info *info)
 	return (0);
 }
 
-int		init_info(t_info *info, char **argv, int argc)
+int	init_info(t_info *info, char **argv, int argc)
 {
 	info->num_philo = ph_atoi(argv[1]);
 	if (info->num_philo <= 0)
-		return(ph_err("Error: There must be at least one philosopher."));
+		return (ph_err("Error: There must be at least one philosopher."));
 	else if (info->num_philo >= 200)
-		return(ph_err("Error: only accommodate less than 200 philosophers."));
+		return (ph_err("Error: only accommodate less than 200 philosophers."));
 	info->time_to_die = ph_atoi(argv[2]);
 	info->time_to_eat = ph_atoi(argv[3]);
 	info->time_to_sleep = ph_atoi(argv[4]);
-	if (info->time_to_die < 60 || info->time_to_eat < 60 || info->time_to_sleep < 60)
+	if (info->time_to_die < 60 || info->time_to_eat < 60
+		|| info->time_to_sleep < 60)
 		return (ph_err("Error: It should be at least 60ms.\n"));
-	if (argc ==6)
+	if (argc == 6)
 	{
 		info->must_eat = ph_atoi(argv[5]);
 		if (info->must_eat <= 0)
@@ -58,7 +59,7 @@ int		init_info(t_info *info, char **argv, int argc)
 	return (0);
 }
 
-int		init_philo(t_info *info)
+int	init_philo(t_info *info)
 {
 	int	i;
 
@@ -96,12 +97,12 @@ void	ph_free(t_info *info)
 	free(info->fork);
 }
 
-int		main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
-	t_info info;
+	t_info	info;
 
 	if (argc < 5 || argc > 6)
-		return(ph_err("Error: Invalid number of arguments"));
+		return (ph_err("Error: Invalid number of arguments"));
 	if (init_info(&info, argv, argc))
 		return (1);
 	if (init_philo(&info))
@@ -111,7 +112,6 @@ int		main(int argc, char *argv[])
 		ph_free(&info);
 		return (1);
 	}
-	ph_free(&info);{
-		return (0);
-	}
+	ph_free(&info);
+	return (0);
 }

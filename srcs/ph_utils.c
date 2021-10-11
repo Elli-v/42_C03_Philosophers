@@ -6,7 +6,7 @@
 /*   By: soooh <soooh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 17:30:32 by soooh             #+#    #+#             */
-/*   Updated: 2021/09/29 00:46:03 by soooh            ###   ########.fr       */
+/*   Updated: 2021/10/11 23:03:23 by soooh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	print_situation(t_philo *philo, int situation)
 		printf("died\n");
 	pthread_mutex_unlock(&philo->info->print);
 }
-
 
 static int	ph_strlen(char *str)
 {

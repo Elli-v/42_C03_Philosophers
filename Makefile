@@ -6,7 +6,7 @@
 #    By: soooh <soooh@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/18 14:49:29 by soooh             #+#    #+#              #
-#    Updated: 2021/09/29 00:46:51 by soooh            ###   ########.fr        #
+#    Updated: 2021/10/11 22:47:34 by soooh            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ INC_DIR = ./includes
 
 SRCS =	./srcs/ph_atoi.c	\
 		./srcs/ph_utils.c	\
+		./ph_atoi_utils.c	\
 		./srcs/philo.c		\
 		./srcs/ph_thread.c	\
 		./srcs/ph_action.c	\

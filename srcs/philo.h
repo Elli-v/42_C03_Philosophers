@@ -6,7 +6,7 @@
 /*   By: soooh <soooh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/18 15:04:00 by soooh             #+#    #+#             */
-/*   Updated: 2021/10/09 16:41:55 by soooh            ###   ########.fr       */
+/*   Updated: 2021/10/11 23:06:39 by soooh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,11 @@ struct	s_philo
 };
 
 void	print_situation(t_philo *philo, int situation);
+int		chk_arg_length(char *arg);
+int		ft_isdigit(int c);
+int		is_numeric(char *arg);
+int		check_arg(char *arg);
+void	atoi_utils(char *str, int negative);
 int		ph_atoi(char *str);
 int		ph_err(char *str);
 int		get_time(void);
