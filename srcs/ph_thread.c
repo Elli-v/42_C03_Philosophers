@@ -6,7 +6,7 @@
 /*   By: soooh <soooh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 14:04:35 by soooh             #+#    #+#             */
-/*   Updated: 2021/10/11 22:54:23 by soooh            ###   ########.fr       */
+/*   Updated: 2021/10/13 01:44:14 by soooh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	*philosopher(void *parameter)
 
 	philo = parameter;
 	if (philo->sequence % 2 == 0 && philo->info->num_philo != 1)
-		usleep(1000 * philo->info->time_to_eat);
+		usleep(100 * philo->info->time_to_eat);
 	while (!philo->info->end)
 	{
 		eat(philo);

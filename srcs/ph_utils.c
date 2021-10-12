@@ -6,7 +6,7 @@
 /*   By: soooh <soooh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 17:30:32 by soooh             #+#    #+#             */
-/*   Updated: 2021/10/11 23:03:23 by soooh            ###   ########.fr       */
+/*   Updated: 2021/10/12 17:19:27 by soooh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	print_situation(t_philo *philo, int situation)
 		pthread_mutex_unlock(&philo->info->print);
 		return ;
 	}
-	printf("%d\t", get_time() - philo->info->base_time);
-	printf("philo no.%d ", philo->sequence + 1);
+	printf("%d ", get_time() - philo->info->base_time);
+	printf("%d ", philo->sequence + 1);
 	if (situation == FORK)
 		printf("has taken a fork\n");
 	else if (situation == EATING)

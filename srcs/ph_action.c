@@ -6,7 +6,7 @@
 /*   By: soooh <soooh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 00:45:34 by soooh             #+#    #+#             */
-/*   Updated: 2021/10/11 22:11:37 by soooh            ###   ########.fr       */
+/*   Updated: 2021/10/13 01:44:18 by soooh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	eat(t_philo *philo)
 		pthread_mutex_lock(&philo->info->fork[philo->f_right]);
 		print_situation(philo, FORK);
 		while (!philo->info->end)
-			usleep(1000);
+			usleep(100);
 		pthread_mutex_unlock(&philo->info->fork[philo->f_right]);
 	}
 	else
@@ -50,7 +50,7 @@ void	eat(t_philo *philo)
 		pthread_mutex_unlock(&philo->critical);
 		while (get_time() - philo->start_time <= philo->info->time_to_eat
 			&& !philo->info->end)
-			usleep(1000);
+			usleep(100);
 		philo->eating++;
 		pthread_mutex_unlock(&philo->info->fork[philo->f_left]);
 		pthread_mutex_unlock(&philo->info->fork[philo->f_right]);
@@ -65,7 +65,7 @@ void	sleeping(t_philo *philo)
 	print_situation(philo, SLEEPING);
 	while (get_time() - sleep_time <= philo->info->time_to_sleep
 		&& !philo->info->end)
-		usleep(1000);
+		usleep(100);
 }
 
 void	thinking(t_philo *phlio)
